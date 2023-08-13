@@ -18,8 +18,9 @@
                                 >
                                     {{ room.name }}
                                 </button>
-                                <i type="button" class="fs-5 mx-3 bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#editRoomModal" @click="this.selectedRoomIndex = index"></i>
-                                <i type="button" class="fs-5 m bi bi-trash3" @click="deleteRoom(index)"></i>
+                                <i type="button" class="fa-solid fa-arrow-rotate-right fa-lg mx-3"></i>
+                                <i type="button" class="fa-solid fa-pen-to-square fa-lg me-3" data-bs-toggle="modal" data-bs-target="#editRoomModal" @click="this.selectedRoomIndex = index"></i>
+                                <i type="button" class="fa-solid fa-trash fa-lg" @click="deleteRoom(index)"></i>
                             </div>
 
                         </div>

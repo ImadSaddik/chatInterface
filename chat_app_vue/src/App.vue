@@ -3,19 +3,20 @@
 
         <div class="row p-2 border-bottom align-items-center">
             <div class="col">
-                <i type="button" class="fs-4 bi bi-layout-sidebar" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"></i>
+                <!-- <i type="button" class="fs-4 bi bi-layout-sidebar" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"></i> -->
+                <i type="button" class="fa-solid fa-expand fa-lg" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"></i>
                 <SideBarVue ref="sidebar" @messages-received="(roomMessages) => loadRoom(roomMessages)"/>
             </div>
             <div class="col d-flex justify-content-center">
                 <p class="fs-2 card-text">mimGPT</p>
             </div>
-            <div class="col d-flex justify-content-end">
-                <i v-if="theme === 'light'" type="button" class="fs-4 me-3 bi bi-brightness-high-fill" @click="toggleDarkMode"></i>
-                <i v-else type="button" class="fs-4 me-3 bi bi-moon-stars-fill" @click="toggleDarkMode"></i>
+            <div class="col d-flex justify-content-end align-items-center">
+                <i v-if="theme === 'light'" type="button" class="fa-solid fa-sun fa-lg me-3" @click="toggleDarkMode"></i>
+                <i v-else type="button" class="fa-solid fa-moon fa-lg me-3" @click="toggleDarkMode"></i>
 
-                <i type="button" class="fs-4 me-3 bi bi-arrow-repeat" @click="clearRoom"></i>
+                <i type="button" class="fa-solid fa-arrow-rotate-right fa-lg me-3" @click="clearRoom"></i>
 
-                <i type="button" class="fs-4 bi bi-bookmarks" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                <i type="button" class="fa-solid fa-floppy-disk fa-lg" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
                 <RoomModal :messages="messages" @room-saved="this.$refs.sidebar.getRooms()"/>
             </div>
         </div>
@@ -56,7 +57,7 @@
             </div>
 
             <div class="col-auto">
-                <i type="button" class="fs-4 bi bi-trash3" @click="prompt = null"></i>
+                <i type="button" class="fa-solid fa-trash fa-lg" @click="prompt = null"></i>
             </div>
         </div>
 
