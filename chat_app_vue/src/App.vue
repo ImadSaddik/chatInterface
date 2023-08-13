@@ -79,14 +79,13 @@ export default {
     data() {
         return {
             prompt: '',
-            messages: [
-                {
-                    message: "Hey there, great to meet you. I’m Pi, your personal AI. My goal is to be useful, friendly and fun. Ask me for advice, for answers, or let’s talk about whatever’s on your mind. How's your day going?",
-                    role: "agent" ,
-                    position: "justify-content-start",
-                    color: "bg-warning-subtle"
-                }
-            ],
+            messages: [],
+            defaultMessage: {
+                message: "Hey there, great to meet you. I’m Pi, your personal AI. My goal is to be useful, friendly and fun. Ask me for advice, for answers, or let’s talk about whatever’s on your mind. How's your day going?",
+                role: "agent" ,
+                position: "justify-content-start",
+                color: "bg-warning-subtle"
+            },
 
             userPosition: "justify-content-end",
             agentPosition: "justify-content-start",
@@ -104,6 +103,7 @@ export default {
     },
     mounted() {
         this.speed = 0;
+        this.messages.push(this.defaultMessage);
         this.showNextText();
     },
     methods: {
@@ -163,9 +163,9 @@ export default {
         },
         clearRoom() {
             console.log('clear room')
-            this.messages = [];
-            this.renderedTexts = [];
-            this.currentTextIndex = 0;
+            this.messages = [this.defaultMessage];
+            this.renderedTexts = [this.defaultMessage];
+            this.currentTextIndex = this.messages.length;
         },
         loadRoom(roomMessages) {
             console.log('load room')
