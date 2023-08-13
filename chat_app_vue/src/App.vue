@@ -3,9 +3,8 @@
 
         <div class="row p-2 border-bottom align-items-center">
             <div class="col">
-                <!-- <i type="button" class="fs-4 bi bi-layout-sidebar" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"></i> -->
                 <i type="button" class="fa-solid fa-expand fa-lg" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"></i>
-                <SideBarVue ref="sidebar" @messages-received="(roomMessages) => loadRoom(roomMessages)"/>
+                <SideBarVue ref="sidebar" :messages="messages" @messages-received="(roomMessages) => loadRoom(roomMessages)"/>
             </div>
             <div class="col d-flex justify-content-center">
                 <p class="fs-2 card-text">mimGPT</p>
@@ -163,13 +162,13 @@ export default {
             }
         },
         clearRoom() {
-            console.log('clear room')
+            this.$refs.sidebar.selectedRoomIndex = -1;
+            
             this.messages = [this.defaultMessage];
             this.renderedTexts = [this.defaultMessage];
             this.currentTextIndex = this.messages.length;
         },
         loadRoom(roomMessages) {
-            console.log('load room')
             this.messages = roomMessages;
             this.renderedTexts = [];
             this.speed = 0;

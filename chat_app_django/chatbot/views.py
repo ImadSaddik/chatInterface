@@ -90,3 +90,17 @@ def deleteRoom(request):
   room.delete()
   
   return JsonResponse({'success': True})
+
+
+@api_view(['POST'])
+def updateRoomMessages(request):
+  data = json.loads(request.body)
+  room = Room.objects.get(id=data['id'])
+  
+  oldMessages = Messages.objects.filter(room=room)
+  newMessages = data['messages']
+  
+  for i in range(len(oldMessages), len(newMessages)):
+    Messages.objects.create(room=room, role=newMessages[i]['role'], message=newMessages[i]['message'])
+    
+  return JsonResponse({'success': True})

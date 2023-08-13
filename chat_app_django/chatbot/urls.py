@@ -8,5 +8,6 @@ urlpatterns = [
     path("getRooms/", views.getRooms.as_view()),
     path("getRoomMessages/", views.getRoomMessages),
     path("editRoom/", views.editRoom),
-    path("deleteRoom/", views.deleteRoom)
+    path("deleteRoom/", views.deleteRoom),
+    path("updateRoomMessages/", views.updateRoomMessages)
 ]
