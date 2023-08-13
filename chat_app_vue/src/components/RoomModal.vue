@@ -50,6 +50,7 @@
                 })
                 .then((response) => {
                     console.log(response);
+                    this.$emit('roomSaved');
                 })
                 .catch((error) => {
                     console.log(error);

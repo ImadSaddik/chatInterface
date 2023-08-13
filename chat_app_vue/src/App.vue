@@ -4,7 +4,7 @@
         <div class="row p-2 border-bottom align-items-center">
             <div class="col">
                 <i type="button" class="fs-4 bi bi-layout-sidebar" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"></i>
-                <SideBarVue @messages-received="(roomMessages) => loadRoom(roomMessages)"/>
+                <SideBarVue ref="sidebar" @messages-received="(roomMessages) => loadRoom(roomMessages)"/>
             </div>
             <div class="col d-flex justify-content-center">
                 <p class="fs-2 card-text">mimGPT</p>
@@ -16,7 +16,7 @@
                 <i type="button" class="fs-4 me-3 bi bi-arrow-repeat" @click="clearRoom"></i>
 
                 <i type="button" class="fs-4 bi bi-bookmarks" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
-                <RoomModal :messages="messages"/>
+                <RoomModal :messages="messages" @room-saved="this.$refs.sidebar.getRooms()"/>
             </div>
         </div>
 

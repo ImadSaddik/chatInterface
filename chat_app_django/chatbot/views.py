@@ -69,4 +69,24 @@ def getRoomMessages(request):
   messages = Messages.objects.filter(room=room)
   serializer = MessagesSerializer(messages, many=True)
   return JsonResponse(serializer.data, safe=False)
-    
+
+
+@api_view(['POST'])
+def editRoom(request):
+  data = json.loads(request.body)
+  
+  room = Room.objects.get(id=data['id'])
+  room.name = data['newName']
+  room.save()
+  
+  return JsonResponse({'success': True})
+
+
+@api_view(['POST'])
+def deleteRoom(request):
+  data = json.loads(request.body)
+  
+  room = Room.objects.get(id=data['id'])
+  room.delete()
+  
+  return JsonResponse({'success': True})
