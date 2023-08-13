@@ -5,6 +5,12 @@ import time
 from django.http import JsonResponse
 
 from rest_framework.decorators import api_view
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+from .models import Room, Messages
+
+from .serializers import RoomSerializer, MessagesSerializer
 
 
 responses = [
@@ -24,10 +30,43 @@ responses = [
 
 @api_view(['POST'])
 def chat(request):
-    global responses
-    prompt = json.loads(request.body)['prompt']
-    # if we have access to a pretrained model, we can feed the prompt into the model and get a response
+  global responses
+  prompt = json.loads(request.body)['prompt']
+  # if we have access to a pretrained model, we can feed the prompt into the model and get a response
+  
+  response = responses[random.randint(0, len(responses) - 1)]
+  
+  return JsonResponse({'response': response})
+  
+  
+@api_view(['POST'])
+def saveRoom(request):
+  data = json.loads(request.body)
+  roomName = data['roomName']
+  messages = data['messages']
+  
+  room = Room.objects.create(name=roomName)
+  
+  for message in messages:
+    role = message['role']
+    message = message['message']
+    Messages.objects.create(room=room, role=role, message=message)
     
-    response = responses[random.randint(0, len(responses) - 1)]
+  return JsonResponse({'success': True})
+
+
+class getRooms(APIView):
+  def get(self, request, format=None):
+    rooms = Room.objects.all()
+    serializer = RoomSerializer(rooms, many=True)
+    return Response(serializer.data)
+  
+  
+def getRoomMessages(request):
+  id = request.GET.get('id')
+  room = Room.objects.get(id=id)
+  
+  messages = Messages.objects.filter(room=room)
+  serializer = MessagesSerializer(messages, many=True)
+  return JsonResponse(serializer.data, safe=False)
     
-    return JsonResponse({'response': response})
