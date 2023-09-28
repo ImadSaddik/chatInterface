@@ -14,7 +14,7 @@ To get started with this project, follow these steps:
 1. Clone the repository: `git clone https://github.com/ImadSaddik/chatInterface.git`
 2. Install the required dependencies: `pip install -r requirements.txt`, the file is inside `chat_app_django`
 3. Go to `chat_app_vue` and run: `npm install`
-4. Go to `chat_app_django` and run: `python manage.py runserver`
+4. Go to `chat_app_django` and run: `python manage.py migrate` & `python manage.py runserver`
 5. Go to `chat_app_vue` and run: `npm run serve`
 
 
