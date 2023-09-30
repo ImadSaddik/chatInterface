@@ -1,7 +1,7 @@
 # mimChat
 
 ## Description
-mimChat is a `python/vue` project that aims to create a simple chat interface. In the backend we use django and you can put there any pretrain model to receive the response and get it displayed in the interface. mim by the way stands for `Made in Morocco`
+mimChat is a `Django / Vue` project that aims to create a simple chat interface. In the backend we use django and you can put there any pretrain model to receive the response and get it displayed in the interface. mim by the way stands for `Made in Morocco`
 
 ## Key Features
 - Easy to use.
