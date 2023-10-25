@@ -3,7 +3,7 @@
     class="container vh-100 border-start border-end d-flex flex-column shadow"
   >
     <div class="row p-2 border-bottom align-items-center">
-      <div class="col">
+      <div class="col-2">
         <i
           type="button"
           class="fa-solid fa-expand fa-lg me-3"
@@ -40,18 +40,56 @@
           type="button"
           class="fa-solid fa-floppy-disk fa-lg"
           data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
+          data-bs-target="#saveModal"
         ></i>
         <RoomModal
           :messages="messages"
           @room-saved="this.$refs.sidebar.getRooms()"
         />
       </div>
-      <div class="col d-flex justify-content-center">
+      <div class="col-8 d-flex justify-content-center">
         <p class="fs-2 card-text">ChatG2IA</p>
       </div>
-      <div class="col d-flex justify-content-end align-items-center">
-        Model selection
+      <div class="col-2 p-0">
+        <div>
+          <div
+            class="dropdown"
+            :class="
+              theme === 'light' ? 'light-mode-dropdown' : 'dark-mode-dropdown'
+            "
+          >
+            <button
+              class="btn btn-secondary dropdown-toggle w-100"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              {{ selectedModel }}
+            </button>
+            <ul class="dropdown-menu w-100">
+              <li>
+                <a class="dropdown-item" @click="selectedModel = model1">{{
+                  model1
+                }}</a>
+              </li>
+              <li>
+                <a class="dropdown-item" @click="selectedModel = model2">{{
+                  model2
+                }}</a>
+              </li>
+              <li>
+                <a class="dropdown-item" @click="selectedModel = model3">{{
+                  model3
+                }}</a>
+              </li>
+              <li>
+                <a class="dropdown-item" @click="selectedModel = model4">{{
+                  model4
+                }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -120,7 +158,7 @@ export default {
       messages: [],
       defaultMessage: {
         message:
-          "Hey there, great to meet you. I’m Pi, your personal AI. My goal is to be useful, friendly and fun. Ask me for advice, for answers, or let’s talk about whatever’s on your mind. How's your day going?",
+          "Hey there, great to meet you. I am your personal AI. My goal is to be useful, friendly and fun. Ask me for advice, for answers, or let us talk about whatever is on your mind. How's your day going?",
         role: "agent",
         position: "justify-content-start",
         color: "bg-warning-subtle",
@@ -138,6 +176,12 @@ export default {
       renderedTexts: [],
 
       theme: "light",
+
+      selectedModel: "mistral-7b-instruct",
+      model1: "mistral-7b-instruct",
+      model2: "llama-2-13b-chat",
+      model3: "falcon-7b-instruct",
+      model4: "vicuna-8b-instruct",
     };
   },
   mounted() {
@@ -161,6 +205,7 @@ export default {
       this.addMessage(messageObject);
       const data = JSON.stringify({
         prompt: this.prompt,
+        model: this.selectedModel,
       });
       this.prompt = "";
 
@@ -200,6 +245,7 @@ export default {
       }
     },
     clearRoom() {
+      this.canSendPrompt = true;
       this.$refs.sidebar.selectedRoomIndex = -1;
 
       this.messages = [this.defaultMessage];
@@ -240,3 +286,46 @@ export default {
   },
 };
 </script>
+
+<style>
+.light-mode-dropdown {
+  background-color: white;
+}
+
+.light-mode-dropdown .dropdown-toggle {
+  background-color: white;
+  border: 1px solid #333;
+  color: #333;
+}
+
+.light-mode-dropdown .dropdown-item {
+  color: #333;
+}
+
+.dark-mode-dropdown {
+  background-color: #333;
+}
+
+.dark-mode-dropdown .dropdown-toggle {
+  background-color: #333;
+  border: 1px solid #495057;
+  color: white;
+}
+
+.dark-mode-dropdown .dropdown-item {
+  color: white;
+}
+
+.btn.dropdown-toggle {
+  text-align: left;
+  padding-right: 2rem;
+  position: relative;
+}
+
+.btn.dropdown-toggle::after {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+}
+</style>

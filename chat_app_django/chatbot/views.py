@@ -17,16 +17,18 @@ from .serializers import RoomSerializer, MessagesSerializer
 @api_view(['POST'])
 def chat(request):
   setUpPalmAPI()
+  data = json.loads(request.body)
+  prompt = data['prompt']
+  selectedModel = data['model'] # use this to select a model from the list of models
   
   completion = palm.generate_text(
     model=getModel(),
-    prompt=json.loads(request.body)['prompt'],
+    prompt=prompt,
     temperature=0,
-    # The maximum length of the response
     max_output_tokens=800,
   )
   
-  response = completion.result if completion.result else 'Sorry, I don\'t understand.'
+  response = completion.result or 'Sorry, I don\'t understand.'
   
   return JsonResponse({'response': response})
 
