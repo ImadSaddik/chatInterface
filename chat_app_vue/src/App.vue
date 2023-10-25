@@ -7,7 +7,7 @@
                 <SideBarVue ref="sidebar" :messages="messages" @messages-received="(roomMessages) => loadRoom(roomMessages)"/>
             </div>
             <div class="col d-flex justify-content-center">
-                <p class="fs-2 card-text">mimGPT</p>
+                <p class="fs-2 card-text">ChatG2IA</p>
             </div>
             <div class="col d-flex justify-content-end align-items-center">
                 <i v-if="theme === 'light'" type="button" class="fa-solid fa-sun fa-lg me-3" @click="toggleDarkMode"></i>
